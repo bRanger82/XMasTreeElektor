@@ -12,7 +12,7 @@ byte pins [] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 };
 // If pin is connected to GND, no fading is used. If it is floating or HIGH, fading is used.
 #define FadingPin       A0
 
-// Putpose: checks, if a pin is set to low.
+// Purpose: checks, if a pin is set to low.
 bool CheckInputPinLow (int pin);
 // Purpose: turns all lights off, including top light
 void AllLightsOff();
@@ -49,7 +49,7 @@ void loop()
 }
 
 /*
- * Putpose: checks, if a pin is set to low.
+ * Purpose: checks, if a pin is set to low.
  * 
  * Parameter(s): pin, the pin number
  * 

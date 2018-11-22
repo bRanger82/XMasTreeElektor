@@ -1,6 +1,8 @@
 // Blinking Christmas tree for Arduino Uno, Elektor SKU: 18348
 // 
-// Changed original code, replaced each define pin to a pin-array and added randomSeed
+// The example code for the project was a little bit too boring, 
+// so I've created my own onw. 
+// This one allows fading of the brightness, which can be enabled/disabled by connecting a control pin (A0) to GND.
 
 // Connected output pins connected to the electronic christmas tree
 byte pins [] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 };  

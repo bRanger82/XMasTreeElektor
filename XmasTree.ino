@@ -13,6 +13,8 @@ byte pins [] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 };
 
 // If pin is connected to GND, no fading is used. If it is floating or HIGH, fading is used.
 #define FadingPin       A0
+// If pin is connected to GND, all LEDs will be turned off
+#define AllOffPin       A1
 
 // Purpose: checks, if a pin is set to low.
 bool CheckInputPinLow (int pin);
@@ -24,7 +26,7 @@ void UpdateLedBrightness(bool Fading = true);
 void setup()
 {
   // define the pins as outputs
-  for (byte pos = 0; pos < (sizeof(pins) / sizeof(pins[0])); pos++)
+  for (byte pos = 0; pos <= (sizeof(pins) / sizeof(pins[0])); pos++)
   {
     pinMode(pins[pos], OUTPUT);
   }
@@ -32,6 +34,14 @@ void setup()
 
 void loop() 
 {
+  // if all LEDs should be turned of, turn them off ;)
+  if (CheckInputPinLow(AllOffPin))
+  {
+    AllLightsOff();
+    delay(1);
+    return;
+  }
+  
   // Have a "realistic" feeling
   randomSeed(millis());
 
@@ -78,7 +88,7 @@ bool CheckInputPinLow (int pin)
 */
 void AllLightsOff()
 {
-  for (byte pos = 0; pos < (sizeof(pins) / sizeof(pins[0])); pos++)
+  for (byte pos = 0; pos <= (sizeof(pins) / sizeof(pins[0])); pos++)
   {
     analogWrite(pins[pos], 0);
   }
@@ -121,11 +131,11 @@ void UpdateLedBrightness(bool Fading = true)
           CurrentValue--;
         }
         analogWrite(pins[pos], CurrentValue);  
-        delayMicroseconds(20);
+        delayMicroseconds(100);
       }  
     } else // Use _no_ fading
     {
-      analogWrite(pins[pos], CurrentValue);  
+      analogWrite(pins[pos], NewToValue);  
     }
   }
 }
